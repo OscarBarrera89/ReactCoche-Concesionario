@@ -1,0 +1,26 @@
+###
+GET http://localhost:3000/api/coche/1
+###
+POST http://localhost:3000/api/coche/
+Content-Type: application/json
+
+{
+    "id_concesionario": 1,
+    "matricula": "5679LLL",
+    "modelo": "Seat Ibiza",
+    "precio": 10000.56,
+    "disponible": true,
+    "fecha_registro": "2021-01-01",
+}
+###
+PUT http://localhost:3000/api/coche/1
+Content-Type: application/json
+
+{
+    "id_concesionario": 1,
+    "matricula": "5679LLL",
+    "modelo": "Seat Ibiza",
+    "precio": 10000.56,
+    "disponible": true,
+    "fecha_registro": "2021-01-01",
+}

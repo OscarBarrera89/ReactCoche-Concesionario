@@ -1,22 +1,31 @@
-// Importar libreria para manejo de ficheros de configuración
-require('dotenv').config();
-// Importar fichero de configuración con variables de entorno
-const config = require('./config/config');
-// Importar librería express --> web server
+// Importar librerías
 const express = require("express");
-// Importar librería path, para manejar rutas de ficheros en el servidor
-const path = require("path");
-// Importar libreria CORS
 const cors = require("cors");
+const path = require("path");
+
+// Importar rutas
+const cocheRoutes = require("./routes/cocheRoutes");
+const concesionarioRoutes = require("./routes/concesionarioRoutes");
+
+// Importar conexión a la base de datos
+const sequelize = require("./config/sequelize");
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Configurar middleware para analizar JSON en las solicitudes
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
-// Configurar CORS para admitir cualquier origen
-app.use(cors());
+
+app.use("/api/coche", cocheRoutes);
+app.use("/api/concesionario", concesionarioRoutes);
 
 // Iniciar el servidor
-app.listen(config.port, () => {
-  console.log(`Servidor escuchando en el puerto ${config.port}`);
+app.listen(port, () => {
+  console.log(`Servidor escuchando en http://localhost:${port}`);
 });

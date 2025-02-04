@@ -1,0 +1,12 @@
+###
+GET http://localhost:3000/api/concesionario/
+
+###
+POST http://localhost:3000/api/concesionario/
+Content-Type: application/json
+{
+    "nombre": "Concesionario 1",
+    "direccion": "Calle de la Concesion, 1",
+    "fecha_fundacion": "2021-01-01",
+    "activo": true,
+}

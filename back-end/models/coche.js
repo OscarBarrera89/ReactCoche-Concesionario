@@ -15,6 +15,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id_concesionario'
       }
     },
+    matricula: {
+      type: DataTypes.STRING(15),
+      allowNull: false
+    },
     modelo: {
       type: DataTypes.STRING(100),
       allowNull: false
