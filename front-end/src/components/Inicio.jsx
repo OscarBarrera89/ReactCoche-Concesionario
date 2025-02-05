@@ -42,7 +42,7 @@ function Inicio() {
                 <MDBDropdownMenu>
                   <MDBDropdownItem href="altaCoche" link>Alta de Coche</MDBDropdownItem>
                   <MDBDropdownItem href="listaCoches" link>Lista de Coches</MDBDropdownItem>
-                  <MDBDropdownItem href="" link>Something else here</MDBDropdownItem>
+                  <MDBDropdownItem href="busquedaCoche" link>Consultar Coche</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
@@ -55,7 +55,7 @@ function Inicio() {
                 <MDBDropdownMenu>
                   <MDBDropdownItem href="altaConcesionario" link>Alta de Concesionario</MDBDropdownItem>
                   <MDBDropdownItem href="listaConcesionarios" link>Lista de Concesionarios</MDBDropdownItem>
-                  <MDBDropdownItem href="" link>Something else here</MDBDropdownItem>
+                  <MDBDropdownItem href="busquedaConcesionario" link>Consultar Concesionario</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>

@@ -17,6 +17,10 @@ import ListadoCoches from './components/ListadoCoches.jsx';
 import ListadoConcesionarios from './components/ListadoConcesionarios.jsx';
 import ModificarCoche from './components/ModificarCoche.jsx';
 import ModificarConcesionario from './components/ModificarConcesionario.jsx';
+import BusquedaCoche from './components/BusquedaCoche.jsx';
+import BusquedaConcesionario from './components/BusquedaConcesionario.jsx';
+import MatriculaEncontrado from './components/MatriculaEncontrada.jsx';
+import ConcesionarioEncontrado from './components/ConcesionarioEncontrado.jsx';
 
 let router = createBrowserRouter([
   {
@@ -47,6 +51,22 @@ let router = createBrowserRouter([
       {
         path: "modificarConcesionario/:id",
         element: <ModificarConcesionario />,
+      },
+      {
+        path: "busquedaCoche",
+        element: <BusquedaCoche />,
+      },
+      {
+        path: "busquedaConcesionario",
+        element: <BusquedaConcesionario />,
+      },
+      {
+        path: "MatriculaEncontrada",
+        element: <MatriculaEncontrado />,
+      },
+      {
+        path: "ConcesionarioEncontrado",
+        element: <ConcesionarioEncontrado />,
       },
     ],
   },

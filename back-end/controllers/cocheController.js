@@ -1,5 +1,6 @@
 // Recuperar función de inicialización de modelos
 const initModels = require("../models/init-models").initModels;
+const { where } = require("sequelize");
 // Crear la instancia de sequelize con la conexión a la base de datos
 const sequelize = require('../config/sequelize.js');
 // Función de logging
@@ -64,7 +65,20 @@ exports.getCocheId = async (req, res) => {
   }
 };
 
-// Controlador para actualizar una nota por su ID
+exports.getCocheMatricula = async (req, res) => {
+  const { matricula } = req.params;
+  try {
+    const coches = await Coche.findAll({ where : { matricula: matricula } });
+    if (coches.length > 0) {
+      res.json(Respuesta.exito(coches[0], 'Coche recuperado'));
+    } else {
+      res.status(404).json(Respuesta.error(null, 'Coche no encontrado'));
+    }
+  } catch (error) {
+    res.status(500).json(Respuesta.error(null, 'Error al obtener el coche'));
+  }
+};
+
 exports.actualizarCoche = async (req, res) => {
   const { id } = req.params;
   const {id_concesionario, matricula, modelo, precio, disponible, fecha_registro } = req.body;

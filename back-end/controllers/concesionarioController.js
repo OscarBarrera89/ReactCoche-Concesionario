@@ -62,7 +62,20 @@ exports.getConcesionarioId = async (req, res) => {
   }
 };
 
-// Controlador para actualizar una nota por su ID
+exports.getConcesionarioNombre = async (req, res) => {
+  const { nombre } = req.params;
+  try {
+    const concesionarios = await Concesionario.findAll({ where : { nombre: nombre } });
+    if (concesionarios.length > 0) {
+      res.json(Respuesta.exito(concesionarios[0], 'Concesionario recuperado'));
+    } else {
+      res.status(404).json(Respuesta.error(null, 'Concesionario no encontrado'));
+    }
+  } catch (error) {
+    res.status(500).json(Respuesta.error(null, 'Error al obtener el concesionario'));
+  }
+};
+
 exports.actualizarConcesionario = async (req, res) => {
   const { id } = req.params;
   const {nombre, direccion, fecha_fundacion, activo} = req.body;

@@ -6,9 +6,9 @@ https://github.com/OscarBarrera89/ReactCoche-Concesionario.git
 ## Datos de Conexión a la Base de Datos
 A continuación, se presentan los datos necesarios para establecer la conexión con la base de datos utilizada en este proyecto:
 
-- **Nombre de la base de datos:** ejemplo_db
-- **Usuario:** admin
-- **Contraseña:** admin123
+- **Nombre de la base de datos:** ventaCoches
+- **Usuario:** root
+- **Contraseña:** test
 
 ## Información Adicional
 Para asegurar la correcta ejecución del proyecto, sigue estos pasos:
@@ -27,7 +27,11 @@ Para asegurar la correcta ejecución del proyecto, sigue estos pasos:
    - Si es necesario, importa el archivo `schema.sql` (o equivalente) para inicializar las tablas.
 
 4. **Ejecución del proyecto:**
+   - Backend: 
    - Inicia el servidor de la aplicación con el comando correspondiente `npm run dev`.
    - Accede a la aplicación a través del navegador en `http://localhost:3000` (o el puerto configurado).
+   - Frontend:
+   - Inicia el servidor de la aplicación con el comando correspondiente `npm run dev`.
+   - Accede a la aplicación a través del navegador en `http://localhost:5173` (o el puerto configurado).
    
 ¡Gracias por usar este proyecto! 🚀

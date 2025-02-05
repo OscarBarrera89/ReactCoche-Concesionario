@@ -24,6 +24,7 @@ function AltaCoche() {
   const [concesionarios, setConcesionarios] = useState([]);
   const navigate = useNavigate();
   const [errorMatricula, setErrorMatricula] = useState(false);
+  const [errorPrecio, setErrorPrecio] = useState(false);
 
   useEffect(() => {
     async function getConcesionarios() {
@@ -89,6 +90,10 @@ const handleChange = (e) => {
     setErrorMatricula(!regexMatricula.test(value));
   }
 
+  if(name === "precio") {
+    setErrorPrecio(value <= 0);
+  }
+
   setCoche((prevCoche) => ({
     ...prevCoche,
     [name]: value,
@@ -145,6 +150,8 @@ const handleChange = (e) => {
               type="number"
               label="Precio"
               name="precio"
+              error={errorPrecio}
+              helperText={errorPrecio ? "Tiene que ser mayor a 0 el valor" : ""}
               value={coche.precio}
               onChange={handleChange}//(e, value) => setDatos({ ...datos, precio: value })
             />

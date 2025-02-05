@@ -20,6 +20,8 @@ function AltaConcesionario(){
       activo: "",
     });
     const navigate = useNavigate();
+    const [errorNombre, setErrorNombre] = useState(false);
+    const [errorDireccion, setErrorDireccion] = useState(false);
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -43,6 +45,14 @@ function AltaConcesionario(){
     };
   
     const handleChange = (e) => {
+
+      if(e.target.name === "nombre"){
+          setErrorNombre(e.target.value.length > 30);
+        
+      }
+      if(e.target.name === "direccion"){
+          setErrorDireccion(e.target.value.length > 45);
+      }
       setConcesionario({
         ...concesionario,
         [e.target.name]: e.target.value,
@@ -65,6 +75,8 @@ function AltaConcesionario(){
                 label="Nombre"
                 type="text"
                 name="nombre"
+                error={errorNombre}
+                helperText={errorNombre ? "No puede tener más de 30 caracteres" : ""}
                 value={concesionario.nombre}
                 onChange={handleChange}
               />
@@ -72,6 +84,8 @@ function AltaConcesionario(){
                 type="text"
                 label="Direccion"
                 name="direccion"
+                error={errorDireccion}
+                helperText={errorDireccion ? "No puede tener más de 45 caracteres" : ""}
                 value={concesionario.direccion}
                 onChange={handleChange}
               />
