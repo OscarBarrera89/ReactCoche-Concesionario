@@ -26,6 +26,11 @@ app.use("/api/coche", cocheRoutes);
 app.use("/api/concesionario", concesionarioRoutes);
 
 // Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+  console.log(`Servidor escuchando en el puerto ${config.port}`);
+  });
+}
+
+//Exportamos la aplicacion para hacer pruebas
+module.exports = app;
