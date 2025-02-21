@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=switchback.proxy.rlwy.net:25751
+      - PMA_PORT=25751
+      - PMA_USER=root
+      - PMA_PASSWORD=lxPQUuhLrqywEvFuPSsLGFLedRvQNpQz
