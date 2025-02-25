@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+import { apiUrl } from "../config";
 
 function BusquedaCoche(){
     const [cocheM, setCocheM] = useState({
@@ -15,7 +16,7 @@ function BusquedaCoche(){
         e.preventDefault();
 
         try {
-          const response = await fetch("http://localhost:3000/api/coche/matricula/" + cocheM.matricula, {
+          const response = await fetch(apiUrl +  "/coche/matricula/" + cocheM.matricula, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
           });

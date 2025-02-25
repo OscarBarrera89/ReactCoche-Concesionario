@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid2";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
+import { apiUrl } from "../config";
 
 function ListadoCoches() {
   const [coches, setCoches] = useState([]);
@@ -26,7 +27,7 @@ function ListadoCoches() {
 
   useEffect(() => {
     async function getCoches() {
-      let response = await fetch("http://localhost:3000/api/coche", {
+      let response = await fetch(apiUrl +  "/coche", {
         method: "GET",
         credentials: "include"
       });
@@ -40,7 +41,7 @@ function ListadoCoches() {
   
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch("http://localhost:3000/api/concesionario", {
+      let response = await fetch(apiUrl +  "/concesionario", {
         method: "GET",
         credentials: "include"
       });
@@ -53,7 +54,7 @@ function ListadoCoches() {
   }, []);
 
   const handleDelete = async (id_coche) => {
-    let response = await fetch("http://localhost:3000/api/coche/" + id_coche, {
+    let response = await fetch(apiUrl +  "/coche/" + id_coche, {
       method: "DELETE",
     });
     if (response.ok) {

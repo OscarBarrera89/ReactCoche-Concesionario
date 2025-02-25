@@ -2,6 +2,7 @@ import { Button, Grid2, Stack, TextField, Typography } from "@mui/material";
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { apiUrl } from "../config";
 
 function BusquedaConcesionario(){
     const [concesionarioN, setConcesionarioN] = useState({
@@ -15,7 +16,7 @@ function BusquedaConcesionario(){
     
         try {
             const response = await fetch(
-                "http://localhost:3000/api/concesionario/nombre/" + concesionarioN.nombre,
+                apiUrl +  "/concesionario/nombre/" + concesionarioN.nombre,
                 {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },

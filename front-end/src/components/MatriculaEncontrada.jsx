@@ -4,6 +4,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { apiUrl } from "../config";
 
 function MatriculaEncontrada() {
   const location = useLocation();
@@ -13,7 +14,7 @@ function MatriculaEncontrada() {
   
   useEffect(() => {
       async function getConcesionarios() {
-        let response = await fetch("http://localhost:3000/api/concesionario", {method: "GET" ,  credentials: "include"});
+        let response = await fetch(apiUrl +  "/concesionario", {method: "GET" ,  credentials: "include"});
   
         if (response.ok) {
           let data = await response.json();
@@ -29,7 +30,7 @@ function MatriculaEncontrada() {
   }
 
   const handleDelete = async (id_coche) => {
-    let response = await fetch("http://localhost:3000/api/coche/" + id_coche, {
+    let response = await fetch(apiUrl +  "/coche/" + id_coche, {
       method: "DELETE",
     });
 

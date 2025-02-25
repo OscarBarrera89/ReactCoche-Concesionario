@@ -1,11 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
-import { HStack } from "@/components/ui/hstack";
-import { Image } from "@/components/ui/image";
-import { Link, LinkText } from "@/components/ui/link";
 import { Text } from "@/components/ui/text";
-import { Icon, ArrowRightIcon } from "@/components/ui/icon";
+import { TrashIcon } from "@/components/ui/icon";
+import { Button, ButtonText } from "@/components/ui/button";
 import { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -21,6 +19,14 @@ export function ListadoScreen() {
     fecha_registro: string;
   }
 
+  interface Concesionario {
+    id_concesionario: number;
+    nombre: string;
+    direccion: string;
+    fecha_fundacion: number;
+    activo: boolean;
+  }
+  const [concesionarios, setConcesionarios] = useState<Concesionario[]>([]);
   const [coches, setCoches] = useState<Coche[]>([]);
 
   useEffect(() => {
@@ -37,6 +43,29 @@ export function ListadoScreen() {
     getCoches();
   }, []);
 
+          useEffect(() => {
+            async function getConcesionarios() {
+              let response = await fetch( "http://localhost:3000/api/concesionario", {method: "GET"});
+        
+              if (response.ok) {
+                let data = await response.json();
+                setConcesionarios(data.datos);
+              }
+            }
+        
+            getConcesionarios();
+          }, []);
+
+        const handleDelete = async (id_coche: number) => {
+          const response = await fetch("http://localhost:3000/api/coche/" + id_coche, {
+            method: "DELETE",
+          });
+          if (response.ok) {
+            const cocheTrasBorrado = coches.filter(coche => coche.id_coche !== id_coche);
+            setCoches(cocheTrasBorrado);
+          }
+        }
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -46,28 +75,16 @@ export function ListadoScreen() {
           {coche.modelo}
         </Heading>
         <Heading size="sm" className="mb-4">
-          {coche.id_concesionario}
+          {concesionarios.find((concesionario) => concesionario.id_concesionario === coche.id_concesionario)?.nombre}
         </Heading>
     <Text
       className="text-sm font-normal mb-2 text-typography-700"
     >
       {coche.matricula}
     </Text>
-    <Link href="https://gluestack.io/" isExternal>
-      <HStack className="items-center">
-        <LinkText
-          size="sm"
-          className="font-semibold text-info-600 no-underline"
-        >
-          Read Blog
-        </LinkText>
-        <Icon
-          as={ArrowRightIcon}
-          size="sm"
-          className="text-info-600 mt-0.5 ml-0.5"
-        />
-      </HStack>
-    </Link>
+    <Button variant="outline" size="sm" onPress={() => handleDelete(coche.id_coche)}>
+        <TrashIcon className="w-5 h-5" />
+    </Button>
   </Card>
       ))}
       </ScrollView>

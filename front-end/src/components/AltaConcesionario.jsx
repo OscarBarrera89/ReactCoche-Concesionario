@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid2";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { apiUrl } from "../config";
 
 function AltaConcesionario(){
   const [concesionario, setConcesionario] = useState({
@@ -26,7 +27,7 @@ function AltaConcesionario(){
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await fetch("http://localhost:3000/api/concesionario", {
+        const response = await fetch(apiUrl +  "/concesionario", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(concesionario),

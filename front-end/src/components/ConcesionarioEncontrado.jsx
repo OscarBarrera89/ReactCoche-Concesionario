@@ -3,6 +3,7 @@ import { Button, Grid2, Paper, Table, TableBody, TableCell, TableContainer, Tabl
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
+import { apiUrl } from "../config";
 
 function ConcesionarioEncontrado() {
   const location = useLocation();
@@ -14,7 +15,7 @@ function ConcesionarioEncontrado() {
   }
 
   const handleDelete = async (id_concesionario) => {
-    let response = await fetch("http://localhost:3000/api/concesionario/" + id_concesionario, {
+    let response = await fetch(apiUrl +  "/concesionario/" + id_concesionario, {
       method: "DELETE",
     });
 

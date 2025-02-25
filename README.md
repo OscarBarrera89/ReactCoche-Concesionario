@@ -33,5 +33,10 @@ Para asegurar la correcta ejecución del proyecto, sigue estos pasos:
    - Frontend:
    - Inicia el servidor de la aplicación con el comando correspondiente `npm run dev`.
    - Accede a la aplicación a través del navegador en `http://localhost:5173` (o el puerto configurado).
+   - Reac-Native:
+   - Inicia el servidor de la aplicación con el comando correspondiente `npm start`.
+   - Accede a la aplicación a través del navegador en `http://localhost:8081` (o el puerto configurado).
+   - Para la parte de React-Native, viene el front-end de la parte de react, pero porque está configurado para este backend y lo he metido en el mismo repositorio.
+
    
 ¡Gracias por usar este proyecto! 🚀

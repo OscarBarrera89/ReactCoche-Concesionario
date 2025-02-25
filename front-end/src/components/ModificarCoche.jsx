@@ -2,6 +2,7 @@ import { Typography, TextField, Stack, Button, Select, MenuItem } from "@mui/mat
 import Grid from "@mui/material/Grid2";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
+import { apiUrl } from "../config";
 
 function ModificarCoche() {
   const params = useParams();
@@ -20,7 +21,7 @@ function ModificarCoche() {
 
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch("http://localhost:3000/api/concesionario", {method: "GET" ,  credentials: "include"});
+      let response = await fetch(apiUrl +  "/concesionario", {method: "GET" ,  credentials: "include"});
 
       if (response.ok) {
         let data = await response.json();
@@ -33,7 +34,7 @@ function ModificarCoche() {
 
   useEffect(() => {
     async function getCoche() {
-      let response = await fetch("http://localhost:3000/api/coche/"+ coche.id_coche);
+      let response = await fetch(apiUrl +  "/coche/"+ coche.id_coche);
       if (response.ok) {
         let data = await response.json();
         setCoche(data.datos);
@@ -50,7 +51,7 @@ function ModificarCoche() {
   const handleSubmit = async (e) => {
     e.preventDefault();
       try {
-        const response = await fetch("http://localhost:3000/api/coche/"+ coche.id_coche, {
+        const response = await fetch(apiUrl +  "/coche/"+ coche.id_coche, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

@@ -6,7 +6,7 @@ const sequelize = require('../config/sequelize.js');
 // Función de logging
 const { logMensaje } = require("../utils/logger.js");
 // Método de creación de objetos de respuesta
-const Respuesta = require('../utils/respuesta');
+const Respuesta = require('../utils/respuesta');  
 
 // Cargar las definiciones del modelo en sequelize
 logMensaje(initModels);

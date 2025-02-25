@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid2";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { apiUrl } from "../config";
 
 function AltaCoche() {
   const [coche, setCoche] = useState({
@@ -28,7 +29,7 @@ function AltaCoche() {
 
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch("http://localhost:3000/api/concesionario", {method: "GET" ,  credentials: "include"});
+      let response = await fetch( apiUrl + "/concesionario", {method: "GET" ,  credentials: "include"});
 
       if (response.ok) {
         let data = await response.json();
@@ -50,7 +51,7 @@ function AltaCoche() {
     console.log("Enviando JSON:", JSON.stringify(cocheConFecha, null, 2));
   
     try {
-      const response = await fetch("http://localhost:3000/api/coche", {
+      const response = await fetch(apiUrl +  "/coche", {
         method: "POST",
         headers: { "Content-Type": "application/json" }, 
         body: JSON.stringify(cocheConFecha),

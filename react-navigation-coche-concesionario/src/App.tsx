@@ -2,12 +2,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { HomeScreen } from './navigation/screens/Home';
-import { AltaScreen } from './navigation/screens/Alta';
 import { ListadoScreen } from './navigation/screens/Listado';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
+import AltaScreen from './navigation/screens/Alta';
 
 const MyDrawer = createDrawerNavigator({
   screens: {

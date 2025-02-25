@@ -2,6 +2,7 @@ import { Button, MenuItem, Select, Stack, TextField, Typography } from "@mui/mat
 import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { apiUrl } from "../config";
 
 function ModificarConcesionario(){
 
@@ -17,7 +18,7 @@ function ModificarConcesionario(){
 
   useEffect(() => {
     async function getConcesionario() {
-      let response = await fetch("http://localhost:3000/api/concesionario/"+ concesionario.id_concesionario);
+      let response = await fetch(apiUrl +  "/concesionario/"+ concesionario.id_concesionario);
       if (response.ok) {
         let data = await response.json();
         setConcesionario(data.datos);
@@ -34,7 +35,7 @@ function ModificarConcesionario(){
   const handleSubmit = async (e) => {
     e.preventDefault();
       try {
-        const response = await fetch("http://localhost:3000/api/concesionario/"+ concesionario.id_concesionario, {
+        const response = await fetch(apiUrl +  "/concesionario/"+ concesionario.id_concesionario, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

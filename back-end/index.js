@@ -7,6 +7,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
+const config = require("./config/config");
 // Importar rutas
 const cocheRoutes = require("./routes/cocheRoutes");
 const concesionarioRoutes = require("./routes/concesionarioRoutes");

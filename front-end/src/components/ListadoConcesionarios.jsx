@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid2";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
+import { apiUrl } from "../config";
 
 function ListadoConcesionarios() {
   const [concesionarios, setConcesionarios] = useState([]);
@@ -24,7 +25,7 @@ function ListadoConcesionarios() {
 
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch("http://localhost:3000/api/concesionario", {method: "GET" ,  credentials: "include"});
+      let response = await fetch(apiUrl +  "/concesionario", {method: "GET" ,  credentials: "include"});
 
       if (response.ok) {
         let data = await response.json();
@@ -36,7 +37,7 @@ function ListadoConcesionarios() {
   }, []); 
 
   const handleDelete = async (id_concesionario) => {
-    let response = await fetch("http://localhost:3000/api/concesionario/" + id_concesionario, {
+    let response = await fetch(apiUrl +  "/concesionario/" + id_concesionario, {
       method: "DELETE",
     });
 
