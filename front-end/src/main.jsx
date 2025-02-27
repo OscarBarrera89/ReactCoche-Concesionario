@@ -21,6 +21,7 @@ import BusquedaCoche from './components/BusquedaCoche.jsx';
 import BusquedaConcesionario from './components/BusquedaConcesionario.jsx';
 import MatriculaEncontrado from './components/MatriculaEncontrada.jsx';
 import ConcesionarioEncontrado from './components/ConcesionarioEncontrado.jsx';
+import GraficaCoches from './components/GraficaCoches.jsx';
 
 let router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ let router = createBrowserRouter([
       {
         path: "ConcesionarioEncontrado",
         element: <ConcesionarioEncontrado />,
+      },
+      {
+        path: "grafica",
+        element: <GraficaCoches/>,
       },
     ],
   },

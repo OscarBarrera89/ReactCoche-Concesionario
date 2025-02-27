@@ -5,6 +5,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
 import { apiUrl } from "../config";
 
+/**
+ * Componente para mostrar la información de un concesionario encontrado por nombre.
+ * @returns {JSX.Element} El componente de concesionario encontrado.
+ */
 function ConcesionarioEncontrado() {
   const location = useLocation();
   const concesionario = location.state?.concesionario;
@@ -14,6 +18,10 @@ function ConcesionarioEncontrado() {
     return <Typography variant="h5">No se encontró información del concesionario.</Typography>;
   }
 
+  /**
+   * Maneja la eliminación de un concesionario.
+   * @param {number} id_concesionario - El ID del concesionario a eliminar.
+   */
   const handleDelete = async (id_concesionario) => {
     let response = await fetch(apiUrl +  "/concesionario/" + id_concesionario, {
       method: "DELETE",
@@ -23,6 +31,7 @@ function ConcesionarioEncontrado() {
       navigate("/busquedaConcesionario");
     }
   };
+
   return (
     <>
     <Typography variant="h4" align="center" sx={{ mt: 2 }}>

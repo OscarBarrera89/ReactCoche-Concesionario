@@ -1,7 +1,15 @@
 # ReactCoche-Concesionario
 
+Tengo el repositorio del trabajo normal que tiene reactNative tambien y el desplegado que tiene el backend con el frontend comprimido 
+
 ## Enlace al Repositorio de GitHub
 https://github.com/OscarBarrera89/ReactCoche-Concesionario.git
+
+## Enlace al Repositorio de GitHub Desplegado
+https://github.com/OscarBarrera89/Coche-Concesionario-Desplegado.git
+
+## Enlace al Repositorio desplegado en Railway
+https://coche-concesionario-desplegado-production.up.railway.app/ 
 
 ## Datos de Conexión a la Base de Datos
 A continuación, se presentan los datos necesarios para establecer la conexión con la base de datos utilizada en este proyecto:

@@ -12,6 +12,10 @@ import { useNavigate } from "react-router";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { apiUrl } from "../config";
 
+/**
+ * Componente para dar de alta un nuevo concesionario.
+ * @returns {JSX.Element} El componente de alta de concesionario.
+ */
 function AltaConcesionario(){
   const [concesionario, setConcesionario] = useState({
       id_concesionario: "",
@@ -23,7 +27,11 @@ function AltaConcesionario(){
     const navigate = useNavigate();
     const [errorNombre, setErrorNombre] = useState(false);
     const [errorDireccion, setErrorDireccion] = useState(false);
-  
+
+    /**
+     * Maneja el envío del formulario para registrar un nuevo concesionario.
+     * @param {Event} e - El evento de envío del formulario.
+     */
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
@@ -44,12 +52,14 @@ function AltaConcesionario(){
         alert("Error al registrar el concesionario");
       }
     };
-  
-    const handleChange = (e) => {
 
+    /**
+     * Maneja los cambios en los campos del formulario.
+     * @param {Event} e - El evento de cambio del campo.
+     */
+    const handleChange = (e) => {
       if(e.target.name === "nombre"){
           setErrorNombre(e.target.value.length > 30);
-        
       }
       if(e.target.name === "direccion"){
           setErrorDireccion(e.target.value.length > 45);
@@ -59,7 +69,7 @@ function AltaConcesionario(){
         [e.target.name]: e.target.value,
       });
     };
-  
+
     return (
       <>
         <Typography variant="h4" align="center" sx={{ mt: 2 }}>
@@ -118,4 +128,5 @@ function AltaConcesionario(){
       </>
     );
 }
+
 export default AltaConcesionario;

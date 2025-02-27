@@ -32,8 +32,7 @@ export function ListadoScreen() {
   useEffect(() => {
     async function getCoches() {
       let response = await fetch("http://localhost:3000/api/coche", {
-        method: "GET",
-        credentials: "include"
+        method: "GET"
       });
       if (response.ok) {
         let data = await response.json();

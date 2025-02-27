@@ -4,14 +4,21 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { apiUrl } from "../config";
 
+/**
+ * Componente para buscar un concesionario por nombre.
+ * @returns {JSX.Element} El componente de búsqueda de concesionario.
+ */
 function BusquedaConcesionario(){
     const [concesionarioN, setConcesionarioN] = useState({
         nombre: "",
       });
     const navigate = useNavigate();
 
-
-      const handleSubmit = async (e) => {
+    /**
+     * Maneja el envío del formulario para buscar un concesionario.
+     * @param {Event} e - El evento de envío del formulario.
+     */
+    const handleSubmit = async (e) => {
         e.preventDefault();
     
         try {
@@ -37,9 +44,12 @@ function BusquedaConcesionario(){
             alert("Error al conectar con el servidor");
         }
     };
-    
 
-      const handleChange = (e) => {
+    /**
+     * Maneja los cambios en los campos del formulario.
+     * @param {Event} e - El evento de cambio del campo.
+     */
+    const handleChange = (e) => {
         const { name, value } = e.target;
       
         setConcesionarioN((concesionario) => ({
@@ -47,7 +57,9 @@ function BusquedaConcesionario(){
           [name]: value,
         }));
       };
-    return(<>
+
+    return(
+      <>
         <Typography variant="h4" align="center" sx={{ mt: 2 }}>
           Busqueda de concesionario por nombre
         </Typography>
@@ -71,6 +83,8 @@ function BusquedaConcesionario(){
             </Stack>
           </Grid2>
         </Grid2>
-      </>)
+      </>
+    );
 }
+
 export default BusquedaConcesionario;

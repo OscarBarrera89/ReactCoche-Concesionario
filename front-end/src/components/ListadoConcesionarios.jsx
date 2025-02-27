@@ -13,6 +13,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router";
 import { apiUrl } from "../config";
 
+/**
+ * Componente para listar los concesionarios.
+ * @returns {JSX.Element} El componente de listado de concesionarios.
+ */
 function ListadoConcesionarios() {
   const [concesionarios, setConcesionarios] = useState([]);
   const [pagina, setPagina] = useState(1);
@@ -23,9 +27,10 @@ function ListadoConcesionarios() {
   const primerConcesionario = ultimoConcesionario - concesionarioPorPagina;
   const concesionariosMostrados = concesionarios.slice(primerConcesionario, ultimoConcesionario);
 
+  // Obtener la lista de concesionarios al cargar el componente
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch(apiUrl +  "/concesionario", {method: "GET" ,  credentials: "include"});
+      let response = await fetch(apiUrl +  "/concesionario", {method: "GET"});
 
       if (response.ok) {
         let data = await response.json();
@@ -36,6 +41,10 @@ function ListadoConcesionarios() {
     getConcesionarios();
   }, []); 
 
+  /**
+   * Maneja la eliminación de un concesionario.
+   * @param {number} id_concesionario - El ID del concesionario a eliminar.
+   */
   const handleDelete = async (id_concesionario) => {
     let response = await fetch(apiUrl +  "/concesionario/" + id_concesionario, {
       method: "DELETE",
@@ -49,6 +58,11 @@ function ListadoConcesionarios() {
     }
   };
 
+  /**
+   * Maneja el cambio de página en la paginación.
+   * @param {Event} event - El evento de cambio de página.
+   * @param {number} value - El número de la nueva página.
+   */
   const handlePageChange = (event, value) => {
     setPagina(value);
   };

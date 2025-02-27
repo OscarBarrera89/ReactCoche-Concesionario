@@ -43,6 +43,7 @@ function Inicio() {
                   <MDBDropdownItem href="altaCoche" link>Alta de Coche</MDBDropdownItem>
                   <MDBDropdownItem href="listaCoches" link>Lista de Coches</MDBDropdownItem>
                   <MDBDropdownItem href="busquedaCoche" link>Consultar Coche</MDBDropdownItem>
+                  <MDBDropdownItem href="grafica" link>Grafica de Coches</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>

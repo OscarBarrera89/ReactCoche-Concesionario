@@ -15,7 +15,36 @@ const models = initModels(sequelize);
 // Recuperar el modelo nota
 const Coche = models.coche;
 
-// Controlador para obtener todas las notas
+
+exports.getGraficaCoches = async (req, res) => {
+  try {
+    const coches = await Coche.findAll({
+      attributes: ["modelo", "precio"],
+      raw: true,
+    });
+
+    if (!coches.length) {
+      return res.status(404).json(Respuesta.error(null, "No se encontraron coches para este concesionario."));
+    }
+
+    console.log(coches);
+    const datosGrafica = coches.map((coche) => ({
+      matricula: coche["modelo"],
+      precio: parseFloat(coche["precio"]),
+    }));
+    console.log(datosGrafica);
+    res.json(Respuesta.exito(datosGrafica, "Precios de coches recuperados"));
+  } catch (err) {
+    logMensaje(`Error al recuperar los datos de los concesionarios: ${err}`);
+    res.status(500).json(
+      Respuesta.error(
+        null,
+        `Error al recuperar los datos de los concesionarios: ${req.originalUrl}`
+      )
+    );
+  }
+};
+
 exports.getCoches = async (req, res) => {
   try {
     const coches = await Coche.findAll();

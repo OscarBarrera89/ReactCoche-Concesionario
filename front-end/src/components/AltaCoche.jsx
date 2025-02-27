@@ -12,6 +12,10 @@ import { useNavigate } from "react-router";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { apiUrl } from "../config";
 
+/**
+ * Componente para dar de alta un nuevo coche.
+ * @returns {JSX.Element} El componente de alta de coche.
+ */
 function AltaCoche() {
   const [coche, setCoche] = useState({
     id_coche: null,
@@ -20,16 +24,17 @@ function AltaCoche() {
     modelo: "",
     precio: 0.00,
     disponible: false,
-    fecha_registro: new Date().toISOString(),
+    fecha_registro: new Date(),
   });
   const [concesionarios, setConcesionarios] = useState([]);
   const navigate = useNavigate();
   const [errorMatricula, setErrorMatricula] = useState(false);
   const [errorPrecio, setErrorPrecio] = useState(false);
 
+  // Obtener la lista de concesionarios al cargar el componente
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch( apiUrl + "/concesionario", {method: "GET" ,  credentials: "include"});
+      let response = await fetch(apiUrl + "/concesionario", {method: "GET"});
 
       if (response.ok) {
         let data = await response.json();
@@ -40,6 +45,10 @@ function AltaCoche() {
     getConcesionarios();
   }, []);
 
+  /**
+   * Maneja el envío del formulario para registrar un nuevo coche.
+   * @param {Event} e - El evento de envío del formulario.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -64,7 +73,7 @@ function AltaCoche() {
           navigate("/");
         }
       } else {
-        const errorText = await response.text(); // Obtener mensaje detallado del backend
+        const errorText = await response.text();
         console.error("Error en la respuesta:", errorText);
         alert("Error al registrar el coche");
       }
@@ -73,36 +82,41 @@ function AltaCoche() {
       alert("Error al conectar con el servidor");
     }
   };
-  
+
+  /**
+   * Formatea una fecha en el formato YYYY-MM-DD.
+   * @param {Date} fecha - La fecha a formatear.
+   * @returns {string} La fecha formateada.
+   */
   const formatoFecha = (fecha) => {
     console.log(fecha);
     const ano = fecha.getFullYear();
     const mes = String(fecha.getMonth() + 1).padStart(2, "0"); 
     const dia = String(fecha.getDate()).padStart(2, "0"); 
-    return `${dia}-${mes}-${ano}`;
+    return `${ano}-${mes}-${dia}`;
   };
-  
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  
-  if (name === "matricula") {
-    const regexMatricula = /^[0-9]{4}[A-Z]{3}$/i; 
-    setErrorMatricula(!regexMatricula.test(value));
-  }
+  /**
+   * Maneja los cambios en los campos del formulario.
+   * @param {Event} e - El evento de cambio del campo.
+   */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    if (name === "matricula") {
+      const regexMatricula = /^[0-9]{4}[A-Z]{3}$/i; 
+      setErrorMatricula(!regexMatricula.test(value));
+    }
 
-  if(name === "precio") {
-    setErrorPrecio(value <= 0);
-  }
+    if(name === "precio") {
+      setErrorPrecio(value <= 0);
+    }
 
-  setCoche((prevCoche) => ({
-    ...prevCoche,
-    [name]: value,
-  }));
-};
-
-  
-  
+    setCoche((prevCoche) => ({
+      ...prevCoche,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
@@ -154,7 +168,7 @@ const handleChange = (e) => {
               error={errorPrecio}
               helperText={errorPrecio ? "Tiene que ser mayor a 0 el valor" : ""}
               value={coche.precio}
-              onChange={handleChange}//(e, value) => setDatos({ ...datos, precio: value })
+              onChange={handleChange}
             />
             <Select name="disponible" value={coche.disponible} onChange={handleChange} displayEmpty>
             <MenuItem value="" disabled>

@@ -13,6 +13,7 @@ const models = initModels(sequelize);
 
 const Concesionario = models.concesionario;
 
+
 exports.getConcesionarios = async (req, res) => {
   try {
     const concesionarios = await Concesionario.findAll();

@@ -9,5 +9,4 @@ router.put('/:id', concesionarioController.actualizarConcesionario);
 router.get('/nombre/:nombre', concesionarioController.getConcesionarioNombre);
 router.get('/:id', concesionarioController.getConcesionarioId);
 
-
 module.exports = router;

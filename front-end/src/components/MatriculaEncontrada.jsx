@@ -6,15 +6,20 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { apiUrl } from "../config";
 
+/**
+ * Componente para mostrar la información de un coche encontrado por matrícula.
+ * @returns {JSX.Element} El componente de coche encontrado.
+ */
 function MatriculaEncontrada() {
   const location = useLocation();
   const coche = location.state?.coche;
   const navigate = useNavigate();
   const [concesionarios, setConcesionarios] = useState([]);
   
+  // Obtener la lista de concesionarios al cargar el componente
   useEffect(() => {
       async function getConcesionarios() {
-        let response = await fetch(apiUrl +  "/concesionario", {method: "GET" ,  credentials: "include"});
+        let response = await fetch(apiUrl +  "/concesionario", {method: "GET"});
   
         if (response.ok) {
           let data = await response.json();
@@ -29,15 +34,21 @@ function MatriculaEncontrada() {
     return <Typography variant="h5">No se encontró información del coche.</Typography>;
   }
 
+  /**
+   * Maneja la eliminación de un coche.
+   * @param {number} id_coche - El ID del coche a eliminar.
+   */
   const handleDelete = async (id_coche) => {
     let response = await fetch(apiUrl +  "/coche/" + id_coche, {
       method: "DELETE",
     });
 
     if (response.ok) {
+      alert("Eliminacion correcta");
       navigate("/busquedaCoche");
     }
   };
+
   return (
     <>
     <Typography variant="h4" align="center" sx={{ mt: 2 }}>

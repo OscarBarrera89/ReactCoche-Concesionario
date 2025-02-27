@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { apiUrl } from "../config";
 
+/**
+ * Componente para modificar la información de un coche.
+ * @returns {JSX.Element} El componente de modificación de coche.
+ */
 function ModificarCoche() {
   const params = useParams();
   const navigate = useNavigate();
@@ -19,9 +23,10 @@ function ModificarCoche() {
   const [concesionarios, setConcesionarios] = useState([]);
   const [errorMatricula, setErrorMatricula] = useState(false);
 
+  // Obtener la lista de concesionarios al cargar el componente
   useEffect(() => {
     async function getConcesionarios() {
-      let response = await fetch(apiUrl +  "/concesionario", {method: "GET" ,  credentials: "include"});
+      let response = await fetch(apiUrl +  "/concesionario", {method: "GET"});
 
       if (response.ok) {
         let data = await response.json();
@@ -32,6 +37,7 @@ function ModificarCoche() {
     getConcesionarios();
   }, []);
 
+  // Obtener la información del coche al cargar el componente
   useEffect(() => {
     async function getCoche() {
       let response = await fetch(apiUrl +  "/coche/"+ coche.id_coche);
@@ -48,6 +54,10 @@ function ModificarCoche() {
     getCoche();
   }, [coche.id_coche, navigate]);
 
+  /**
+   * Maneja el envío del formulario para actualizar la información del coche.
+   * @param {Event} e - El evento de envío del formulario.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
       try {
@@ -61,7 +71,7 @@ function ModificarCoche() {
 
         if (response.ok) {
           alert("Actualización correcta");
-          navigate(-1);
+          navigate(-2);
         } else {
           const data = await response.json();
           alert(data.mensaje);
@@ -72,6 +82,10 @@ function ModificarCoche() {
       }
   };
 
+  /**
+   * Maneja los cambios en los campos del formulario.
+   * @param {Event} e - El evento de cambio del campo.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     
@@ -134,7 +148,7 @@ function ModificarCoche() {
               label="Precio"
               name="precio"
               value={coche.precio}
-              onChange={handleChange}//(e, value) => setDatos({ ...datos, precio: value })
+              onChange={handleChange}
             />
             <Select name="disponible" value={coche.disponible} onChange={handleChange} displayEmpty>
             <MenuItem value="" disabled>

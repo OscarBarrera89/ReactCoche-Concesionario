@@ -5,6 +5,10 @@ import { useNavigate } from "react-router";
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import { apiUrl } from "../config";
 
+/**
+ * Componente para buscar un coche por matrícula.
+ * @returns {JSX.Element} El componente de búsqueda de coche.
+ */
 function BusquedaCoche(){
     const [cocheM, setCocheM] = useState({
       matricula: "",
@@ -12,6 +16,10 @@ function BusquedaCoche(){
     const [errorMatricula, setErrorMatricula] = useState(false);
     const navigate = useNavigate();
 
+    /**
+     * Maneja el envío del formulario para buscar un coche.
+     * @param {Event} e - El evento de envío del formulario.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -38,7 +46,11 @@ function BusquedaCoche(){
         }
       };
 
-      const handleChange = (e) => {
+    /**
+     * Maneja los cambios en los campos del formulario.
+     * @param {Event} e - El evento de cambio del campo.
+     */
+    const handleChange = (e) => {
         const { name, value } = e.target;
         
         if (name === "matricula") {
@@ -51,6 +63,7 @@ function BusquedaCoche(){
           [name]: value,
         }));
       };
+
     return(
         <>
       <Typography variant="h4" align="center" sx={{ mt: 2 }}>
@@ -80,4 +93,5 @@ function BusquedaCoche(){
     </>
     );
 }
+
 export default BusquedaCoche;

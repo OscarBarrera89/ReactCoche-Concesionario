@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/MatriculaEncontrada.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/MatriculaEncontrada.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useLocation } from "react-router";
+import { Button, Grid2, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material.Edit';
+import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { apiUrl } from "../config";
+
+/**
+ * Componente para mostrar la información de un coche encontrado por matrícula.
+ * @returns {JSX.Element} El componente de coche encontrado.
+ */
+function MatriculaEncontrada() {
+  const location = useLocation();
+  const coche = location.state?.coche;
+  const navigate = useNavigate();
+  const [concesionarios, setConcesionarios] = useState([]);
+  
+  // Obtener la lista de concesionarios al cargar el componente
+  useEffect(() => {
+      async function getConcesionarios() {
+        let response = await fetch(apiUrl +  "/concesionario", {method: "GET"});
+  
+        if (response.ok) {
+          let data = await response.json();
+          setConcesionarios(data.datos);
+        }
+      }
+  
+      getConcesionarios();
+    }, []);
+
+  if (!coche) {
+    return &lt;Typography variant="h5">No se encontró información del coche.&lt;/Typography>;
+  }
+
+  /**
+   * Maneja la eliminación de un coche.
+   * @param {number} id_coche - El ID del coche a eliminar.
+   */
+  const handleDelete = async (id_coche) => {
+    let response = await fetch(apiUrl +  "/coche/" + id_coche, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      alert("Eliminacion correcta");
+      navigate("/busquedaCoche");
+    }
+  };
+
+  return (
+    &lt;>
+    &lt;Typography variant="h4" align="center" sx={{ mt: 2 }}>
+        Listado de coches
+      &lt;/Typography>
+
+      &lt;Grid2 size={{ xs: 12, sm: 6, md: 4 }} mx={4}>
+        &lt;TableContainer component={Paper} sx={{ mt: 2 }}>
+          &lt;Table aria-label="simple table">
+            &lt;TableHead>
+              &lt;TableRow>
+                &lt;TableCell align="center">IDCoche&lt;/TableCell>
+                &lt;TableCell>Concesionario&lt;/TableCell>
+                &lt;TableCell>Matrícula&lt;/TableCell>
+                &lt;TableCell>Modelo&lt;/TableCell>
+                &lt;TableCell>Precio&lt;/TableCell>
+                &lt;TableCell>Disponible&lt;/TableCell>
+                &lt;TableCell>Fecha de registro&lt;/TableCell>
+                &lt;TableCell>Modificar&lt;/TableCell>
+                &lt;TableCell>Borrar&lt;/TableCell>
+              &lt;/TableRow>
+            &lt;/TableHead>
+            &lt;TableBody>
+                &lt;TableRow
+                  key={coche.id_coche}
+                  sx={{ "&amp;:last-child td, &amp;:last-child th": { border: 0 } }}
+                >
+                  &lt;TableCell align="center">{coche.id_coche}&lt;/TableCell>
+                  &lt;TableCell>{concesionarios.map((concesionario => (
+                    concesionario.id_concesionario === coche.id_concesionario ? concesionario.nombre : ""
+                  )))}&lt;/TableCell>
+                  &lt;TableCell>{coche.matricula}&lt;/TableCell>
+                  &lt;TableCell>{coche.modelo}&lt;/TableCell>
+                  &lt;TableCell>{coche.precio + " €"}&lt;/TableCell>
+                  &lt;TableCell>{coche.disponible ? "Disponible" : "No disponible"}&lt;/TableCell>
+                  &lt;TableCell>{coche.fecha_registro}&lt;/TableCell>
+                  &lt;TableCell>
+                    &lt;Button
+                      variant="contained"
+                      onClick={() => navigate("/modificarCoche/" + coche.id_coche)}
+                    >
+                      &lt;EditIcon fontSize="small" />
+                    &lt;/Button>
+                  &lt;/TableCell>
+                  &lt;TableCell>
+                    &lt;Button
+                      variant="contained"
+                      onClick={() => handleDelete(coche.id_coche)}
+                      color="error"
+                    >
+                      &lt;DeleteOutlineIcon fontSize="small" />
+                    &lt;/Button>
+                  &lt;/TableCell>
+                &lt;/TableRow>
+            &lt;/TableBody>
+          &lt;/Table>
+        &lt;/TableContainer>
+      &lt;/Grid2>
+    &lt;/>
+  );
+}
+
+export default MatriculaEncontrada;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AltaCoche">AltaCoche</a></li><li><a href="global.html#AltaConcesionario">AltaConcesionario</a></li><li><a href="global.html#BusquedaCoche">BusquedaCoche</a></li><li><a href="global.html#BusquedaConcesionario">BusquedaConcesionario</a></li><li><a href="global.html#ConcesionarioEncontrado">ConcesionarioEncontrado</a></li><li><a href="global.html#GraficaCoches">GraficaCoches</a></li><li><a href="global.html#ListadoCoches">ListadoCoches</a></li><li><a href="global.html#ListadoConcesionarios">ListadoConcesionarios</a></li><li><a href="global.html#MatriculaEncontrada">MatriculaEncontrada</a></li><li><a href="global.html#ModificarCoche">ModificarCoche</a></li><li><a href="global.html#ModificarConcesionario">ModificarConcesionario</a></li><li><a href="global.html#generatePDF">generatePDF</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 26 2025 20:22:58 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
